@@ -36,11 +36,6 @@ function operate(a, b, op) {
 	return result;
 };
 
-
-let firstNumber = 0;
-let secondNumber = 0;
-let operator = "";
-
 const States = {
 	EMPTY: Symbol("empty"),
 	FIRSTNUMBER: Symbol("first number"),
@@ -49,11 +44,19 @@ const States = {
 	SECONDOPERATOR: Symbol("second operator"),
 };
 
+const calculator = {
+	firstNumber: "",
+	secondNumber: "",
+	operator: "",
+	nextOperator: "",
+	state: States.EMPTY,
+};
+
 function updateButtons(state) {
 	switch (state) {
 		case States.EMPTY:
-			operatorButtons.forEach(element => element.disabled = true);
-			equalsButton.disabled = true;
+			// operatorButtons.forEach(element => element.disabled = true);
+			// equalsButton.disabled = true;
 			break;
 		case States.FIRSTNUMBER:
 
@@ -70,7 +73,6 @@ function updateButtons(state) {
 	}
 };
 
-let state = States.EMPTY;
 
 const buttons = document.querySelectorAll("main button")
 const numberButtons = document.querySelectorAll(".number");
@@ -85,17 +87,50 @@ buttons.forEach(element => {
 });
 
 function update(button) {
-	switch (state) {
-		case States.EMPTY:
-			readout += button.dataset.func
-			console.log(readout)
-			break;
-		default:
-			// statements_def
-			break;
-	}
+	if (button.classList.contains("number")) {
+		switch (calculator.state) {
+			case States.EMPTY:
+			case States.FIRSTNUMBER:
+				calculator.firstNumber += button.dataset.func;
+				calculator.state = States.FIRSTNUMBER;
+				break;
+			case States.SECONDNUMBER:
+				calculator.secondNumber += button.dataset.func;
+				break;
+			default:
+				// statements_def
+				break;
+		};
+	} else if (button.classList.contains("operator")) {
+		switch (calculator.state) {
+			case States.FIRSTNUMBER:
+				calculator.operator = button.dataset.func;
+				calculator.state = States.SECONDNUMBER;
+				break;
+			case States.SECONDNUMBER:
+				calculator.nextOperator = button.dataset.func;
+				calculator.state = States.FIRSTNUMBER;
+				calculator.firstNumber = operate(calculator.firstNumber, calculator.secondNumber, calculator.operator);
+				break;
+			default:
+				// statements_def
+				break;
+		}
+	} else if (button.classList.contains("equals")) {
+		if (calculator.state == States.SECONDNUMBER) {
+			calculator.state = States.FIRSTNUMBER;
+			calculator.firstNumber = operate(calculator.firstNumber, calculator.secondNumber, calculator.operator);
+			calculator.secondNumber = "";
+			calculator.operator = "";
+		};
+	};
+	updateReadout();
 };
 
-updateButtons(state);
+function updateReadout() {
+	readoutText.innerText = `${calculator.firstNumber} ${calculator.operator} ${calculator.secondNumber}`
+}
+
+updateButtons(calculator.state);
 
 
