@@ -33,7 +33,7 @@ function operate(a, b, op) {
 			Error("invalid operator");
 			break;
 	};
-	return result;
+	return result.toString();
 };
 
 const States = {
@@ -116,16 +116,20 @@ function update(button) {
 	} else if (button.classList.contains("operator")) {
 		switch (calculator.state) {
 			case States.EMPTY:
-				calculator.firstNumber += operatorToSymbol(button.dataset.func); //this is for negative number input
-				calculator.state = States.FIRSTPREFIX;
+				if (button.classList.contains("subtract")) {
+					calculator.firstNumber += operatorToSymbol(button.dataset.func); //this is for negative number input
+					calculator.state = States.FIRSTPREFIX;
+				};
 				break;
 			case States.FIRSTNUMBER:
 				calculator.operator = button.dataset.func;
 				calculator.state = States.OPERATOR;
 				break;
 			case States.OPERATOR:
-				calculator.secondNumber += operatorToSymbol(button.dataset.func); //this is for negative number input
-				calculator.state = States.SECONDPREFIX;
+				if (button.classList.contains("subtract")) {
+					calculator.secondNumber += operatorToSymbol(button.dataset.func); //this is for negative number input
+					calculator.state = States.SECONDPREFIX;
+				};
 				break;
 			case States.SECONDNUMBER:
 				calculator.nextOperator = button.dataset.func;
