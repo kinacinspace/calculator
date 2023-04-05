@@ -97,17 +97,17 @@ function update(button) {
 			case States.EMPTY:
 			case States.FIRSTNUMBER:
 			case States.FIRSTPREFIX:
+				if (calculator.firstNumber == "0") calculator.firstNumber = "";
+				console.log("gdg")
 				calculator.firstNumber += button.dataset.func;
 				calculator.state = States.FIRSTNUMBER;
 				break;
 			case States.OPERATOR:
 			case States.SECONDNUMBER:
 			case States.SECONDPREFIX:
+				if (calculator.secondNumber == "0") calculator.secondNumber = "";
 				calculator.secondNumber += button.dataset.func;
 				calculator.state = States.SECONDNUMBER;
-				break;
-			default:
-				// statements_def
 				break;
 		};
 	} else if (button.classList.contains("operator")) {
@@ -134,9 +134,6 @@ function update(button) {
 				calculator.state = States.SECONDNUMBER;
 				calculator.secondNumber = "";
 				calculator.operator = calculator.nextOperator;
-				break;
-			default:
-				// statements_def
 				break;
 		}
 	} else if (button.classList.contains("equals")) {
