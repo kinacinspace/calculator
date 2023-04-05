@@ -31,7 +31,7 @@ main {
 	border-width: 0.4vh;
 	border-radius: 1vh;
 	width: 40vh;
-	height: 10vh;
+	min-height: 5vh;
 	display: flex;
 	align-items: center;
 	color: white;
@@ -42,8 +42,10 @@ main {
 	width: inherit;
 	text-align: right;
 	font-size: 5vh;
-	padding: 1vh;
+	padding: 1vh 1vh 1vh 0vh;
 	word-wrap: break-word;
+	min-height: 1em;
+	margin: 0;
 }
 
 .buttons {

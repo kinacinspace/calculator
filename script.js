@@ -186,7 +186,7 @@ function update(button) {
 				break;
 		}
 	}
-	updateButtons(calculator.state);
+	// updateButtons(calculator.state);
 	updateReadout();
 };
 
@@ -228,6 +228,6 @@ function operatorToSymbol(op){
 	}
 };
 
-updateButtons(calculator.state);
+// updateButtons(calculator.state);
 
 
