@@ -131,7 +131,7 @@ function update(button) {
 			case States.SECONDNUMBER:
 				calculator.nextOperator = button.dataset.func;
 				calculator.firstNumber = operate(calculator.firstNumber, calculator.secondNumber, calculator.operator);
-				calculator.state = States.SECONDNUMBER;
+				calculator.state = States.OPERATOR;
 				calculator.secondNumber = "";
 				calculator.operator = calculator.nextOperator;
 				break;
