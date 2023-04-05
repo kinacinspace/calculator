@@ -52,8 +52,6 @@ const calculator = {
 	operator: "",
 	nextOperator: "",
 	state: States.EMPTY,
-	firstNumberNegative: false,
-	secondNumberNegative: false,
 };
 
 const buttons = document.querySelectorAll("main button")
@@ -91,7 +89,6 @@ function updateButtons(state) {
 			break;	
 	}
 };
-
 
 
 function update(button) {
@@ -168,9 +165,19 @@ function update(button) {
 				};
 				break;
 		};
+	} else if (button.classList.contains("clear")) {
+		reset();
 	};
 	updateButtons(calculator.state);
 	updateReadout();
+};
+
+function reset() {
+	calculator.firstNumber = "";
+	calculator.secondNumber = "";
+	calculator.operator = "";
+	calculator.nextOperator = "";
+	calculator.state = States.EMPTY;
 };
 
 function backspaceString(str) {
