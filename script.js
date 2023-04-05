@@ -211,7 +211,7 @@ function backspaceString(str) {
 };
 
 function updateReadout() {
-	readoutText.innerText = `${calculator.firstNumber} ${operatorToSymbol(calculator.operator)} ${calculator.secondNumber}`;
+	readoutText.innerText = `${calculator.firstNumber}${operatorToSymbol(calculator.operator)}${calculator.secondNumber}`;
 };
 
 function operatorToSymbol(op){
