@@ -60,12 +60,21 @@ const operatorButtons = document.querySelectorAll(".operator");
 const subtractButton = document.querySelector(".subtract")
 const equalsButton = document.querySelector(".equals");
 const readoutText = document.querySelector(".readout");
+document.addEventListener("keydown", (event) => hotkeyButtons(event.key))
 
 let readout = "";
 
 buttons.forEach(element => {
 	element.addEventListener("click", (element) => update(element.target));
 });
+
+function hotkeyButtons(key){
+	buttons.forEach(element => {
+		if (element.dataset.hotkey == key) {
+			element.click()
+		}
+	});
+};
 
 
 function updateButtons(state) {
@@ -98,7 +107,6 @@ function update(button) {
 			case States.FIRSTNUMBER:
 			case States.FIRSTPREFIX:
 				if (calculator.firstNumber == "0") calculator.firstNumber = "";
-				console.log("gdg")
 				calculator.firstNumber += button.dataset.func;
 				calculator.state = States.FIRSTNUMBER;
 				break;
@@ -182,13 +190,13 @@ function update(button) {
 	updateReadout();
 };
 
+
 function isNumberValidForDecimal(num) {
 	if (num.includes(".") || num == "") {
 		return false;
 	};
 	return true;
 }
-
 
 function reset() {
 	calculator.firstNumber = "";
