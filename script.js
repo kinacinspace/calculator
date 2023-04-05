@@ -145,9 +145,32 @@ function update(button) {
 			calculator.secondNumber = "";
 			calculator.operator = "";
 		};
+	} else if (button.classList.contains("backspace")) {
+		switch (calculator.state) {
+			case States.OPERATOR:
+				calculator.operator = "";
+				calculator.state = States.FIRSTNUMBER;
+				break;
+			case States.FIRSTNUMBER:
+				calculator.firstNumber = backspaceString(calculator.firstNumber);
+				if (calculator.firstNumber == "") {
+					calculator.state = States.EMPTY;
+				};
+				break;
+			case States.SECONDNUMBER:
+				calculator.secondNumber = backspaceString(calculator.secondNumber);
+				if (calculator.secondNumber == "") {
+					calculator.state = States.OPERATOR;
+				};
+				break;
+		};
 	};
 	updateButtons(calculator.state);
 	updateReadout();
+};
+
+function backspaceString(str) {
+	return str.substring(0, str.length -1);
 };
 
 function updateReadout() {
