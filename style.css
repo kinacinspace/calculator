@@ -1,0 +1,30 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+}
+
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+	width: 20vw;
+	height: 20vw;
+}
+
+
+.buttons button {
+	width: 5vw;
+	height: 5vw;
+}
+
+.buttons .equals,
+.buttons .backspace {
+	width: 10vw;
+}
