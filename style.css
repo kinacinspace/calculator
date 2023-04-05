@@ -16,16 +16,16 @@ main {
 	display: flex;
 	flex-direction: column;
 	padding: 2vh;
-	background-color: #D3FFE9;
+	background-color: #b0a8f3;
 	border: solid;
 	border-width: 0.5vh;
 	border-radius: 4vh;
-	border-color: #8DDBE0;
+	border-color: #162324;
 	box-shadow: 0 0 5vh #111111;
 }
 
 .display {
-	background-color: #4B5043;
+	background-color: #3b3e35;
 	border: solid;
 	border-color: #090909;
 	border-width: 0.4vh;
@@ -54,16 +54,23 @@ main {
 	flex: 1;
 }
 
-
 .buttons button {
-	width: 10vh;
-	height: 10vh;
+	width: 9.5vh;
+	height: 9.5vh;
+	margin: 0.25vh;
 	font-size: 4vh;
-	border-radius: 1vh;
+	color: #001122;
+	border-radius: 3vh;
+	border-color: #82b5b9;
+	border-width: 0.5vh;
 	padding: 0;
+}
+
+.buttons button:hover {
+	transform: scale(1.05);
 }
 
 .buttons .equals,
 .buttons .backspace {
-	width: 20vh;
+	width: 19.5vh;
 }
