@@ -28,6 +28,10 @@ function operate(a, b, op) {
 			break;
 		case "divide":
 			result = divide(a, b);
+			if (b == "0") {
+				result = "";
+				divideByZero = true;
+			};
 			break;
 		default:
 			Error("invalid operator");
@@ -53,6 +57,8 @@ const calculator = {
 	nextOperator: "",
 	state: States.EMPTY,
 };
+
+let divideByZero = false;
 
 const buttons = document.querySelectorAll("main button")
 const numberButtons = document.querySelectorAll(".number");
@@ -212,6 +218,12 @@ function backspaceString(str) {
 
 function updateReadout() {
 	readoutText.innerText = `${calculator.firstNumber}${operatorToSymbol(calculator.operator)}${calculator.secondNumber}`;
+	if (divideByZero) {
+		readoutText.innerText = "nice try!";
+		calculator.state = States.EMPTY;
+		calculator.operator = "";
+		divideByZero = false;
+	}
 };
 
 function operatorToSymbol(op){
