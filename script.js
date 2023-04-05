@@ -164,10 +164,31 @@ function update(button) {
 		};
 	} else if (button.classList.contains("clear")) {
 		reset();
-	};
+	} else if (button.classList.contains("decimal")) {
+		switch (calculator.state) {
+			case States.FIRSTNUMBER:
+				if (isNumberValidForDecimal(calculator.firstNumber)) {
+					calculator.firstNumber += "."
+				}
+				break;
+			case States.SECONDNUMBER:
+				if (isNumberValidForDecimal(calculator.secondNumber)) {
+					calculator.secondNumber += "."
+				}
+				break;
+		}
+	}
 	updateButtons(calculator.state);
 	updateReadout();
 };
+
+function isNumberValidForDecimal(num) {
+	if (num.includes(".") || num == "") {
+		return false;
+	};
+	return true;
+}
+
 
 function reset() {
 	calculator.firstNumber = "";
